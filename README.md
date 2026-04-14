@@ -116,7 +116,7 @@ Example:
 ![Final Answer](FinalAnswer.png)
 
 ### Implemented Design 
-![Implemented Design](Screenshot 2026-04-14 190417.png)
+![Implemented Design](implement.png)
 
 ## How to Run
 
