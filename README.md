@@ -154,20 +154,6 @@ If waveform dumping is enabled in the simulator environment, open the generated 
 - understanding Braun array multiplier data flow
 - writing simple but effective testbenches for exhaustive verification
 
-## Best Resume Positioning
-
-Place this 3rd if your first two projects are more advanced, such as:
-
-- cache controller
-- RISC-V processor
-- pipelined CPU
-- memory hierarchy or coherency work
-
-That ordering is actually good because it shows range:
-
-- advanced architecture/system design first
-- focused digital logic implementation after that
-
 ## Author
 
 **Adarsh Akshat**
