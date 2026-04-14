@@ -1,256 +1,176 @@
-diff --git a/c:\Users\adars\OneDrive\Desktop\Multipler\Multiplier\README.md b/c:\Users\adars\OneDrive\Desktop\Multipler\Multiplier\README.md
-deleted file mode 100644
---- a/c:\Users\adars\OneDrive\Desktop\Multipler\Multiplier\README.md
-+++ /dev/null
-@@ -1,251 +0,0 @@
--# ⚡ Braun Multiplier (4x4 Carry-Save Array Multiplier)
--
--A **gate-level Verilog implementation** of a 4x4 Braun Multiplier using the **carry-save array architecture**. This project demonstrates how arithmetic circuits are built from scratch using fundamental logic gates and modular design principles.
--
--Built entirely using **structural modeling** — no behavioral constructs.
--
-----
--
--## 🧠 What is a Braun Multiplier?
--
--The Braun Multiplier is a **parallel array multiplier** that performs unsigned multiplication using:
--* Partial product generation using AND gates
--* Carry-save addition for intermediate results
--* Final carry-propagate addition for the output
--
--It's a foundational circuit in digital design, commonly used in:
--* Arithmetic Logic Units (ALUs)
--* Digital Signal Processing (DSP)
--* Hardware accelerators
--
-----
--
--## 🎯 Project Goals
--
--This project was built to:
--* Understand how arithmetic circuits are constructed from basic logic gates
--* Learn carry propagation and modular design using simple building blocks
--* Gain hands-on experience with **gate-level Verilog modeling**
--* Practice systematic testing and verification using testbenches
--
--**Note:** Gate-level modeling is not preferred for large systems, but it provides **maximum visibility into logic flow** — ideal for learning.
--
-----
--
--## ✨ Features
--
--* 🔹 Fully structural, gate-level design
--* 🔹 Modular architecture (Half Adder → Full Adder → Multiplier)
--* 🔹 Comprehensive testbenches for each module
--* 🔹 Waveform outputs for visual verification
--* 🔹 Exhaustive testing (all 256 input combinations for 4x4 multiplication)
--
-----
--
--## 🏗️ Design Architecture
--
--### Layered Development Approach
--
--```
--Half Adder (HA)
--    ↓ (tested independently)
--Full Adder (FA) — built using 2 HAs
--    ↓ (tested independently)
--4x4 Braun Multiplier (BM) — built using cascaded FAs
--    ↓ (tested with all input combinations)
--Complete Verified Design
--```
--
--### Block Diagram
--
--```
--    A[3:0] × B[3:0]
--         ↓
--   Partial Products (AND gates)
--         ↓
--   Carry-Save Array (Full Adders)
--         ↓
--   Final Addition Layer
--         ↓
--    P[7:0] (8-bit Product)
--```
--
-----
--
--## 📂 Project Structure
--
--```
--.
--├── HA.v                    # Half Adder module
--├── HA_tb.v                 # Half Adder testbench
--├── FA.v                    # Full Adder module (built using HAs)
--├── FA_tb.v                 # Full Adder testbench
--├── BM.v                    # 4x4 Braun Multiplier (top module)
--├── BM_tb.v                 # Braun Multiplier testbench
--├── HA_waveform.png         # Half Adder simulation waveform
--├── FA_waveform.png         # Full Adder simulation waveform
--└── BM_waveform.png         # Multiplier simulation waveform
--```
--
-----
--
--## 🔧 Modules Overview
--
--### 1. Half Adder (HA)
--* **Inputs:** `a`, `b`
--* **Outputs:** `sum`, `carry`
--* **Logic:** Pure gate-level using XOR and AND gates
--
--### 2. Full Adder (FA)
--* **Inputs:** `a`, `b`, `cin`
--* **Outputs:** `sum`, `cout`
--* **Implementation:** Built using 2 Half Adders and 1 OR gate
--
--### 3. 4x4 Braun Multiplier (BM)
--* **Inputs:** `A[3:0]`, `B[3:0]` (two 4-bit unsigned numbers)
--* **Output:** `P[7:0]` (8-bit product)
--* **Implementation:** Array of Full Adders processing partial products
--
-----
--
--## 🚀 How to Run
--
--### Option 1: Using EDA Playground (Recommended)
--
--1. Go to [EDA Playground](https://www.edaplayground.com/)
--2. Copy the module code into the left panel
--3. Copy the testbench code into the right panel
--4. Select **Icarus Verilog 12.0** as the simulator
--5. Enable **EPWave** for waveform viewing
--6. Click **Run**
--
--**Pro Tips:**
--* Go to Settings → Enable "Open waveform in new tab"
--* Expand code windows for better visibility
--* Make sure `$dumpfile` and `$dumpvars` are present in the testbench
--
--### Option 2: Using Local Simulator
--
--```bash
--# Compile and simulate using Icarus Verilog
--iverilog -o output HA.v HA_tb.v
--vvp output
--
--# View waveform using GTKWave
--gtkwave dump.vcd
--```
--
-----
--
--## 🧪 Testing Strategy
--
--### Half Adder Testing
--* All 4 input combinations tested
--* Verified sum and carry outputs
--
--### Full Adder Testing
--* All 8 input combinations tested
--* Verified correct carry propagation
--
--### Braun Multiplier Testing
--* **Exhaustive testing:** All 256 combinations (0×0 to 15×15)
--* Outputs monitored using `$monitor`
--* Waveforms captured for visual verification
--
--Example test cases:
--```
--0000 × 0000 = 00000000
--0101 × 0011 = 00001111 (5 × 3 = 15)
--1111 × 1111 = 11100001 (15 × 15 = 225)
--```
--
-----
--
--## 📊 Simulation Results
--
--All modules were tested independently before integration:
--
--* ✅ **Half Adder:** Correct sum and carry generation
--* ✅ **Full Adder:** Proper carry propagation
--* ✅ **Braun Multiplier:** Accurate 4x4 multiplication for all inputs
--
--Waveform screenshots are included in the repository for verification.
--
-----
--
--## 🛠️ Development Tools
--
--### Recommended Setup
--* **Code Editor:** Visual Studio Code
--* **Extension:** Verilog-HDL/SystemVerilog (for syntax highlighting)
--* **Simulator:** Icarus Verilog / EDA Playground
--* **Waveform Viewer:** EPWave / GTKWave
--
-----
--
--## 📌 Key Learnings
--
--* Understanding arithmetic circuit design from first principles
--* Building complex modules from simple building blocks (bottom-up approach)
--* Gate-level modeling and structural instantiation in Verilog
--* Systematic testing and verification methodology
--* Carry propagation in array multipliers
--* Modular design for hardware systems
--
-----
--
--## 🎓 Educational Value
--
--This project is perfect for:
--* Students learning digital logic design
--* Understanding how multiplication is implemented in hardware
--* Learning Verilog structural modeling
--* Practicing testbench development and waveform analysis
--
--**Why gate-level?**
--While not used in modern industrial designs, gate-level modeling provides:
--* Complete visibility into logic operations
--* Understanding of data paths and signal flow
--* Foundation for more complex RTL designs
--
-----
--
--## 🔮 Future Enhancements
--
--Possible extensions to this project:
--* Implement 8x8 or 16x16 multipliers
--* Add signed multiplication support (Booth's algorithm)
--* Compare with behavioral model for verification
--* Synthesize design and analyze area/delay trade-offs
--* Implement Wallace Tree multiplier for comparison
--
-----
--
--## 👨‍💻 Author
--
--**Adarsh Akshat**
--* B.Tech in Electrical and Electronics Engineering, NITK
--* GitHub: [@aadiakshat](https://github.com/aadiakshat)
--
-----
--
--## 📝 License
--
--MIT License - Feel free to use this for learning and educational purposes.
--
-----
--
--## 🤝 Contributing
--
--Suggestions and improvements are welcome! Feel free to:
--* Report issues
--* Suggest optimizations
--* Share educational resources
--
-----
--
--## 📚 References
--
--* Digital Design and Computer Architecture by Harris & Harris
--* Verilog HDL: A Guide to Digital Design and Synthesis by Samir Palnitkar
--* VLSI Digital Signal Processing Systems by Keshab K. Parhi
+# Braun Multiplier in Verilog
+
+A gate-level Verilog implementation of a 4x4 unsigned Braun multiplier built from basic digital design blocks. The project follows a bottom-up flow:
+
+`Half Adder -> Full Adder -> Braun Multiplier`
+
+This is a strong academic hardware project because it shows structural modeling, modular design, and verification across all `16 x 16 = 256` input combinations.
+
+## Why This Project Matters
+
+This project demonstrates:
+
+- structural Verilog design using logic primitives
+- hierarchical hardware construction from reusable modules
+- understanding of partial product generation and carry propagation
+- testbench-based verification for combinational arithmetic circuits
+
+If your resume already has stronger projects like a cache controller and a RISC-V design, this is perfectly fine as the 3rd project. It works best when framed as a solid digital-design validation project rather than your most advanced system-level project.
+
+Suggested resume line:
+
+> Designed and verified a 4-bit Braun multiplier in gate-level Verilog using modular half-adder and full-adder blocks; tested all 256 input combinations and validated outputs through simulation waveforms.
+
+## Architecture
+
+The multiplier is built in three layers:
+
+1. `ha` for sum and carry generation
+2. `FA/fa` using two half adders and one OR gate
+3. `BM` top module for 4x4 multiplication
+
+The design computes partial products with AND gates, reduces them through an array of adders, and produces an 8-bit output.
+
+## Project Files
+
+```text
+Multiplier/
+|-- Half Adder Module.v
+|-- Half Adder Test Bench.v
+|-- Full Adder using HA cascade.v
+|-- Full Adder TB.v
+|-- BraunMultiplierDesign.v
+|-- BraunMultipliertb.v
+|-- mult.vvp
+|-- HalfAdder.png
+|-- FullAdder.png
+|-- Circuit.png
+|-- HA waveform.png
+|-- BM waveform.png
+|-- TestResult.png
+|-- FinalAnswer.png
+`-- README.md
+```
+
+## Module Summary
+
+### Half Adder
+
+- Inputs: `a`, `b`
+- Outputs: `s`, `c`
+- Logic used: `xor`, `and`
+
+### Full Adder
+
+- Inputs: `a`, `b`, `cin`
+- Outputs: `s`, `c`
+- Built using two half adders and one OR gate
+
+### Braun Multiplier
+
+- Inputs: `a[3:0]`, `b[3:0]`
+- Output: `c[7:0]`
+- Uses AND-generated partial products and cascaded adders
+
+## Verification
+
+The verification flow is one of the strongest parts of this project:
+
+- Half adder testbench checks all 4 input combinations
+- Full adder testbench checks all 8 input combinations
+- Braun multiplier testbench sweeps all 256 possible input pairs
+
+Example:
+
+```text
+0000 x 0000 = 00000000
+0101 x 0011 = 00001111
+1111 x 1111 = 11100001
+```
+
+## Results
+
+### Logic Building Blocks
+
+#### Half Adder
+
+![Half Adder](HalfAdder.png)
+
+#### Full Adder
+
+![Full Adder](FullAdder.png)
+
+### Braun Multiplier Circuit
+
+![Braun Multiplier Circuit](Circuit.png)
+
+### Simulation Waveforms
+
+#### Half Adder Waveform
+
+![Half Adder Waveform](HA%20waveform.png)
+
+#### Braun Multiplier Waveform
+
+![Braun Multiplier Waveform](BM%20waveform.png)
+
+### Output Snapshots
+
+![Test Result](TestResult.png)
+
+![Final Answer](FinalAnswer.png)
+
+## How to Run
+
+You can run the design using Icarus Verilog or EDA Playground.
+
+### Half Adder
+
+```bash
+iverilog -o ha_out "Half Adder Module.v" "Half Adder Test Bench.v"
+vvp ha_out
+```
+
+### Full Adder
+
+```bash
+iverilog -o fa_out "Full Adder using HA cascade.v" "Full Adder TB.v"
+vvp fa_out
+```
+
+### Braun Multiplier
+
+```bash
+iverilog -o bm_out "BraunMultiplierDesign.v" "BraunMultipliertb.v"
+vvp bm_out
+```
+
+If waveform dumping is enabled in the simulator environment, open the generated `.vcd` file in GTKWave.
+
+## Key Learnings
+
+- translating arithmetic hardware into structural Verilog
+- building larger combinational circuits from smaller verified modules
+- understanding Braun array multiplier data flow
+- writing simple but effective testbenches for exhaustive verification
+
+## Best Resume Positioning
+
+Place this 3rd if your first two projects are more advanced, such as:
+
+- cache controller
+- RISC-V processor
+- pipelined CPU
+- memory hierarchy or coherency work
+
+That ordering is actually good because it shows range:
+
+- advanced architecture/system design first
+- focused digital logic implementation after that
+
+## Author
+
+**Adarsh Akshat**
+
+- B.Tech, Electrical and Electronics Engineering
+- GitHub: [@aadiakshat](https://github.com/aadiakshat)
