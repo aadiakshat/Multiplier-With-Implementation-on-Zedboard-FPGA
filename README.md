@@ -82,6 +82,9 @@ Example:
 0101 x 0011 = 00001111
 1111 x 1111 = 11100001
 ```
+## FPGA
+![Zedboard FPGA](Zedboard.jpeg)
+
 
 ## Results
 
