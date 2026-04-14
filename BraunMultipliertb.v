@@ -1,6 +1,6 @@
 
 `timescale 1ns/1ns
-module ha_tb;
+module bm_tb;
   reg [3:0]a,b;
   wire [7:0]c;
   integer i,j;
