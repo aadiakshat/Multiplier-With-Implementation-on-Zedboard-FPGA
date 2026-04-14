@@ -6,8 +6,10 @@ module ha_tb;
   integer i,j;
   BM uut(.a(a),.b(b),.c(c));
   initial begin
-    for(i=0;i<=4'b1111;i++)begin
-      for(j=0;j<=4'b1111;j++)begin
+    a = 0;
+    b = 0;
+    for(i=0;i<=4'b1111;i=i+1) begin
+      for(j=0;j<=4'b1111;j=j+1) begin
         a=i;b=j;#10;
       end
     end
