@@ -115,6 +115,9 @@ Example:
 
 ![Final Answer](FinalAnswer.png)
 
+### Implemented Design 
+![Implemented Design](Screenshot 2026-04-14 190417.png)
+
 ## How to Run
 
 You can run the design using Icarus Verilog or EDA Playground.
