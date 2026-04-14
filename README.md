@@ -15,11 +15,6 @@ This project demonstrates:
 - understanding of partial product generation and carry propagation
 - testbench-based verification for combinational arithmetic circuits
 
-If your resume already has stronger projects like a cache controller and a RISC-V design, this is perfectly fine as the 3rd project. It works best when framed as a solid digital-design validation project rather than your most advanced system-level project.
-
-Suggested resume line:
-
-> Designed and verified a 4-bit Braun multiplier in gate-level Verilog using modular half-adder and full-adder blocks; tested all 256 input combinations and validated outputs through simulation waveforms.
 
 ## Architecture
 
